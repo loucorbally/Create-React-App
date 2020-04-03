@@ -3,16 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
+constructor(props) {
+  super(props);
+  //To “remember” things, components use state. React components can have state by setting this.state in their constructors. 
+  this.state = {
+    value: null
+  };
+}
+
+// When the square is clicked it displays an X in the clicked box. 
   render() {
     return (
-      <button className="square">
-        {this.props.value}
+      <button className="square" 
+        onClick={() => this.setState({value: 'X'})}>
+        {this.state.value}
       </button>
     );
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
   renderSquare(i) {
     return <Square value={i}/>;
   }
